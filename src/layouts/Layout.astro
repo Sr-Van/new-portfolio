@@ -1,101 +1,50 @@
 ---
-import '../styles/jhey-craft.css';
-
 interface Props {
   title: string;
-  description: string;
-  lang?: 'pt' | 'en';
+  description?: string;
 }
 
-const { title, description, lang = 'pt' } = Astro.props;
+const { 
+  title, 
+  description = 'Vanderson Erlan — Desenvolvedor Web Full Stack' 
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang={lang} class="scroll-smooth">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <title>{title}</title>
 
-    <!-- Google Fonts: Space Grotesk (Display), Inter (Body), JetBrains Mono (Code) -->
+    <!-- Google Font: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
   </head>
-  <body class="bg-[#050811] text-slate-100 min-h-screen font-sans selection:bg-emerald-400 selection:text-slate-950 relative overflow-x-hidden">
-    
-    <!-- Ambient Backdrop Grid & Lighting inspired by Jhey Tompkins -->
-    <div class="fixed inset-0 bg-grid-pattern opacity-60 pointer-events-none -z-20"></div>
-    <div class="fixed inset-0 bg-radial-vignette pointer-events-none -z-10"></div>
-    <div id="ambient-spotlight" class="fixed inset-0 pointer-events-none -z-10 transition-opacity duration-300 opacity-0 md:opacity-100"></div>
-
-    <slot />
-
-    <!-- Global Mouse Spotlight & Tilt Engine Script -->
-    <script>
-      // Global ambient spotlight
-      const spotlight = document.getElementById('ambient-spotlight');
-      window.addEventListener('mousemove', (e) => {
-        if (spotlight) {
-          const x = (e.clientX / window.innerWidth) * 100;
-          const y = (e.clientY / window.innerHeight) * 100;
-          spotlight.style.background = `radial-gradient(800px circle at ${e.clientX}px ${e.clientY}px, rgba(16, 185, 129, 0.05), rgba(139, 92, 246, 0.03) 40%, transparent 80%)`;
-        }
-
-        // Update local card spotlights
-        document.querySelectorAll<HTMLElement>('.glow-card').forEach((card) => {
-          const rect = card.getBoundingClientRect();
-          const localX = e.clientX - rect.left;
-          const localY = e.clientY - rect.top;
-          card.style.setProperty('--spotlight-x', `${localX}px`);
-          card.style.setProperty('--spotlight-y', `${localY}px`);
-        });
-      });
-
-      // 3D Tilt calculation on hover for tilt-cards
-      document.querySelectorAll<HTMLElement>('.tilt-card').forEach((card) => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const rotateX = ((y - centerY) / centerY) * -6; // max 6deg tilt
-          const rotateY = ((x - centerX) / centerX) * 6;
-          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-        });
-      });
-    </script>
+  <body class="bg-black text-white min-h-screen font-sans antialiased selection:bg-white selection:text-black">
+    <main class="max-w-2xl mx-auto px-6 py-16 sm:py-24">
+      <slot />
+    </main>
   </body>
 </html>
 
 <style is:global>
-  ::selection {
-    background-color: #10b981;
-    color: #050811;
+  /* Estilo simples e direto para links */
+  a {
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
   }
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #050811;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #1e293b;
-    border-radius: 5px;
-    border: 2px solid #050811;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #10b981;
+  a:hover {
+    color: #a1a1aa;
+    text-decoration-color: #a1a1aa;
   }
 </style>

@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { projectsList } from '../../data/projects';
+
+// Ordena do mais importante (1) para o menos importante
+const sortedProjects = [...projectsList].sort((a, b) => a.importanceOrder - b.importanceOrder);
+---
+
+<Layout title="Projetos — Vanderson Erlan">
+  <div class="space-y-8">
+    
+    <!-- Link de Retorno -->
+    <nav>
+      <a href="/" class="text-sm text-zinc-400 hover:text-white no-underline hover:underline">
+        &larr; voltar
+      </a>
+    </nav>
+
+    <!-- Cabeçalho da Sessão -->
+    <header class="space-y-2">
+      <h1 class="text-2xl font-bold tracking-tight text-white">
+        projetos
+      </h1>
+      <p class="text-zinc-400 text-sm leading-relaxed">
+        Aqui estão meus projetos, organizados do mais importante para o menos importante.
+      </p>
+    </header>
+
+    <!-- Lista de Links de Projetos -->
+    <section class="pt-4 border-t border-zinc-900">
+      <ol class="space-y-6">
+        {sortedProjects.map((project, index) => (
+          <li class="space-y-1">
+            <div class="flex items-baseline gap-2">
+              <span class="text-xs font-mono text-zinc-500">{index + 1}.</span>
+              <a href={`/projetos/${project.slug}`} class="text-base sm:text-lg font-medium text-white hover:text-zinc-300">
+                {project.title}
+              </a>
+            </div>
+            <p class="text-sm text-zinc-400 pl-5">
+              {project.subtitle}
+            </p>
+            <p class="text-xs text-zinc-500 pl-5 font-mono">
+              {project.technologies.join(' • ')}
+            </p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+  </div>
+</Layout>

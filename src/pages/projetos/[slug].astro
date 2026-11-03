@@ -1,0 +1,178 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { projectsList, type ProjectDetail } from '../../data/projects';
+
+export async function getStaticPaths() {
+  return projectsList.map((project) => ({
+    params: { slug: project.slug },
+    props: { project }
+  }));
+}
+
+interface Props {
+  project: ProjectDetail;
+}
+
+const { project } = Astro.props;
+---
+
+<Layout title={`${project.title} — Vanderson Erlan`}>
+  <article class="space-y-10">
+    
+    <!-- Link de Retorno -->
+    <nav>
+      <a href="/projetos" class="text-sm text-zinc-400 hover:text-white no-underline hover:underline">
+        &larr; voltar para projetos
+      </a>
+    </nav>
+
+    <!-- Cabeçalho do Projeto -->
+    <header class="space-y-3">
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+        {project.title}
+      </h1>
+      <p class="text-base text-zinc-400 leading-relaxed">
+        {project.subtitle}
+      </p>
+
+      <!-- Tecnologias -->
+      <div class="pt-2 text-xs font-mono text-zinc-400">
+        <span class="text-zinc-600">tecnologias:</span> {project.technologies.join(', ')}
+      </div>
+
+      <!-- Links Diretos -->
+      <div class="flex items-center gap-4 pt-2 text-sm">
+        {project.githubUrl && (
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+            código no github &rarr;
+          </a>
+        )}
+        {project.liveUrl && (
+          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+            acessar aplicação online &rarr;
+          </a>
+        )}
+      </div>
+    </header>
+
+    <!-- Demonstração em Vídeo -->
+    <section class="space-y-3 pt-6 border-t border-zinc-900">
+      <h2 class="text-lg font-semibold text-white">
+        demonstração em vídeo
+      </h2>
+      
+      {project.videoUrl ? (
+        <div class="aspect-video w-full bg-zinc-950 border border-zinc-800 rounded flex items-center justify-center overflow-hidden">
+          <video controls class="w-full h-full">
+            <source src={project.videoUrl} type="video/mp4" />
+            Seu navegador não suporta a tag de vídeo.
+          </video>
+        </div>
+      ) : (
+        <div class="p-6 bg-zinc-950 border border-zinc-900 rounded text-sm text-zinc-400 space-y-2">
+          <p class="text-zinc-300 font-medium">[Vídeo de demonstração]</p>
+          <p class="text-xs text-zinc-500">
+            Adicione o arquivo de vídeo do projeto em <code>public/videos/</code> ou configure o link no arquivo <code>src/data/projects.ts</code>.
+          </p>
+        </div>
+      )}
+    </section>
+
+    <!-- Prints / Screenshots -->
+    <section class="space-y-4 pt-6 border-t border-zinc-900">
+      <h2 class="text-lg font-semibold text-white">
+        telas e screenshots
+      </h2>
+      
+      {project.screenshots && project.screenshots.length > 0 ? (
+        <div class="space-y-6">
+          {project.screenshots.map((shot) => (
+            <figure class="space-y-2">
+              <div class="p-2 bg-zinc-950 border border-zinc-900 rounded">
+                <img
+                  src={shot.url}
+                  alt={shot.caption}
+                  class="w-full h-auto rounded bg-zinc-900"
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+                />
+                <div style="display:none;" class="p-8 text-center text-xs text-zinc-500 font-mono">
+                  [Imagem em {shot.url} — coloque a imagem na pasta public/]
+                </div>
+              </div>
+              <figcaption class="text-xs text-zinc-400 font-mono">
+                {shot.caption}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      ) : (
+        <p class="text-sm text-zinc-500">
+          Nenhuma captura de tela cadastrada no momento.
+        </p>
+      )}
+    </section>
+
+    <!-- Explicações Detalhadas -->
+    <section class="space-y-6 pt-6 border-t border-zinc-900 text-sm leading-relaxed text-zinc-300">
+      
+      <div class="space-y-2">
+        <h2 class="text-lg font-semibold text-white">
+          sobre o projeto
+        </h2>
+        <p>
+          {project.summary}
+        </p>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="font-semibold text-white">
+          o problema
+        </h3>
+        <p class="text-zinc-400">
+          {project.content.problem}
+        </p>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="font-semibold text-white">
+          a solução desenvolvida
+        </h3>
+        <p class="text-zinc-400">
+          {project.content.solution}
+        </p>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="font-semibold text-white">
+          arquitetura e decisões técnicas
+        </h3>
+        <ul class="space-y-1.5 list-disc list-inside text-zinc-400">
+          {project.content.architecture.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="space-y-2">
+        <h3 class="font-semibold text-white">
+          aprendizados e resultados
+        </h3>
+        <ul class="space-y-1.5 list-disc list-inside text-zinc-400">
+          {project.content.learnings.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- Rodapé de Navegação do Projeto -->
+    <nav class="pt-8 border-t border-zinc-900 text-sm">
+      <a href="/projetos">
+        &larr; voltar para a lista de projetos
+      </a>
+    </nav>
+
+  </article>
+</Layout>

@@ -1,26 +1,50 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
-import Hero from '../components/Hero.astro';
-import Projects from '../components/Projects.astro';
-import Skills from '../components/Skills.astro';
-import About from '../components/About.astro';
-import Contact from '../components/Contact.astro';
-import Footer from '../components/Footer.astro';
-import { siteContent } from '../data/translations';
-
-const lang = 'pt';
-const t = siteContent[lang];
 ---
 
-<Layout title={t.meta.title} description={t.meta.description} lang={lang}>
-  <Navbar lang={lang} />
-  <main>
-    <Hero lang={lang} />
-    <Projects lang={lang} />
-    <Skills lang={lang} />
-    <About lang={lang} />
-    <Contact lang={lang} />
-  </main>
-  <Footer lang={lang} />
+<Layout title="Vanderson Erlan — Desenvolvedor Web Full Stack">
+  <div class="space-y-8">
+    
+    <!-- Identificação -->
+    <header class="space-y-1">
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+        Vanderson Erlan
+      </h1>
+      <p class="text-zinc-400 text-base sm:text-lg">
+        Desenvolvedor Web Full Stack
+      </p>
+    </header>
+
+    <!-- Resumo Direto -->
+    <section class="space-y-4 text-zinc-300 text-base leading-relaxed">
+      <p>
+        Estudante de Ciência da Computação e desenvolvedor focado em criar soluções que equilibram tecnologia robusta e aplicabilidade prática.
+      </p>
+      <p>
+        Experiência com Angular, React, TypeScript, Node.js e Python. Vivência prática em ambientes com Docker, automação de fluxos CI/CD e integração com GenAI.
+      </p>
+    </section>
+
+    <!-- Navegação para as Sessões -->
+    <nav class="pt-6 border-t border-zinc-900">
+      <ul class="space-y-3 text-base">
+        <li>
+          <a href="/projetos">projetos</a>
+        </li>
+        <li>
+          <a href="/habilidades">habilidades</a>
+        </li>
+        <li>
+          <a href="/formacao">formacao</a>
+        </li>
+        <li>
+          <a href="/links">links</a>
+        </li>
+        <li>
+          <a href="/ferramentas">ferramentas</a>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
 </Layout>
