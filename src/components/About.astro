@@ -1,0 +1,94 @@
+---
+import type { Lang } from '../data/translations';
+import { siteContent } from '../data/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = siteContent[lang];
+---
+
+<section id="formacao" class="py-20 border-t border-slate-900">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="mb-14">
+      <div class="inline-flex items-center gap-2 font-mono text-xs font-semibold text-emerald-400 tracking-wider uppercase mb-2">
+        <span>//</span>
+        <span>Background</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+        {t.education.sectionTitle}
+      </h2>
+      <p class="mt-2 text-slate-400 max-w-2xl text-base">
+        {t.education.sectionSubtitle}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      
+      <!-- Degrees & Education (2 cols) -->
+      <div class="lg:col-span-2 space-y-6">
+        <h3 class="text-xl font-bold text-slate-200 flex items-center gap-2">
+          <span>🎓</span>
+          <span>{lang === 'pt' ? 'Formação Acadêmica' : 'Academic Education'}</span>
+        </h3>
+
+        <div class="space-y-4">
+          {t.education.degrees.map((deg) => (
+            <div class="p-6 rounded-xl bg-slate-900/50 border border-slate-800/80 hover:border-slate-700 transition">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                <h4 class="text-base sm:text-lg font-bold text-white">
+                  {deg.course}
+                </h4>
+                <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 w-fit">
+                  {deg.period}
+                </span>
+              </div>
+              <p class="text-sm text-slate-300 font-medium">
+                {deg.institution}
+              </p>
+              <p class="text-xs text-slate-400 mt-2 font-mono">
+                Status: <span class="text-slate-200">{deg.status}</span>
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Languages & Soft Skills (1 col) -->
+      <div class="space-y-6">
+        <h3 class="text-xl font-bold text-slate-200 flex items-center gap-2">
+          <span>🌐</span>
+          <span>{t.education.languages.title}</span>
+        </h3>
+
+        <div class="p-6 rounded-xl bg-slate-900/50 border border-slate-800/80 space-y-4">
+          {t.education.languages.items.map((item) => (
+            <div class="pb-3 border-b border-slate-800/80 last:border-none last:pb-0">
+              <div class="flex items-center justify-between">
+                <span class="text-sm font-semibold text-white">{item.name}</span>
+                <span class="text-xs font-mono text-emerald-400">{item.level}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="p-6 rounded-xl bg-gradient-to-br from-emerald-500/10 to-transparent border border-emerald-500/20">
+          <h4 class="text-sm font-bold text-emerald-300 uppercase font-mono tracking-wider mb-2">
+            {lang === 'pt' ? 'Mentalidade Técnica' : 'Engineering Mindset'}
+          </h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            {lang === 'pt' 
+              ? 'Abordagem orientada a resolver problemas reais com simplicidade, código testável e modular, automação de processos e aprendizado contínuo.'
+              : 'Problem-solving mindset focused on simplicity, testable modular code, automation and continuous technical curiosity.'}
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,66 @@
+---
+import type { Lang } from '../data/translations';
+import { siteContent } from '../data/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = siteContent[lang];
+const isPt = lang === 'pt';
+const basePrefix = isPt ? '' : '/en';
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md transition-all">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <!-- Brand Logo -->
+    <a href={isPt ? '/' : '/en'} class="group flex items-center gap-2">
+      <span class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center font-mono font-bold text-emerald-400 group-hover:bg-emerald-500/20 group-hover:border-emerald-500/50 transition">
+        &lt;/&gt;
+      </span>
+      <span class="font-bold text-lg tracking-tight text-slate-100 group-hover:text-emerald-400 transition">
+        Van<span class="text-emerald-400">.dev</span>
+      </span>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+      <a href={`${basePrefix}#projetos`} class="hover:text-emerald-400 transition">{t.nav.projects}</a>
+      <a href={`${basePrefix}#habilidades`} class="hover:text-emerald-400 transition">{t.nav.skills}</a>
+      <a href={`${basePrefix}#formacao`} class="hover:text-emerald-400 transition">{t.nav.education}</a>
+      <a href={`${basePrefix}#contato`} class="hover:text-emerald-400 transition">{t.nav.contact}</a>
+    </nav>
+
+    <!-- Language Selector & Actions -->
+    <div class="flex items-center gap-3">
+      <!-- Language Switcher -->
+      <div class="flex items-center bg-slate-900 border border-slate-800 rounded-lg p-0.5 text-xs font-semibold">
+        <a
+          href="/"
+          class={`px-2.5 py-1 rounded-md transition ${isPt ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'text-slate-400 hover:text-slate-200'}`}
+          title="Versão em Português"
+        >
+          PT
+        </a>
+        <a
+          href="/en"
+          class={`px-2.5 py-1 rounded-md transition ${!isPt ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'text-slate-400 hover:text-slate-200'}`}
+          title="English Version"
+        >
+          EN
+        </a>
+      </div>
+
+      <!-- Resume Button -->
+      <a
+        href="/curriculo-vanderson.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden sm:inline-flex items-center justify-center px-3.5 py-1.5 text-xs font-semibold text-slate-100 bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-emerald-500/50 rounded-lg transition"
+      >
+        {t.nav.resumeBtn}
+      </a>
+    </div>
+  </div>
+</header>

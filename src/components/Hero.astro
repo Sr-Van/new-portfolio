@@ -1,0 +1,79 @@
+---
+import type { Lang } from '../data/translations';
+import { siteContent } from '../data/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = siteContent[lang];
+const isPt = lang === 'pt';
+const basePrefix = isPt ? '' : '/en';
+---
+
+<section class="relative pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden">
+  <!-- Subtle ambient glow background -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[300px] bg-emerald-500/10 blur-[120px] -z-10 rounded-full pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl space-y-6">
+      
+      <!-- Availability Badge -->
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-xs font-medium text-emerald-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>{t.hero.badge}</span>
+      </div>
+
+      <!-- Main Heading -->
+      <div class="space-y-2">
+        <p class="text-sm md:text-base font-mono text-emerald-400">{t.hero.greeting}</p>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white">
+          {t.hero.name}
+        </h1>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-400">
+          {t.hero.role}
+        </h2>
+      </div>
+
+      <!-- Summary -->
+      <p class="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
+        {t.hero.summary}
+      </p>
+
+      <!-- Key Tech Stack Badges -->
+      <div class="flex flex-wrap gap-2 pt-2">
+        {['Angular 17', 'React', 'Node.js', 'Express', 'Python', 'MongoDB', 'Docker', 'REST APIs'].map((tech) => (
+          <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-900 border border-slate-800 text-slate-300">
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-4 pt-4">
+        <a
+          href={`${basePrefix}#projetos`}
+          class="inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-semibold text-slate-950 bg-emerald-400 hover:bg-emerald-300 transition shadow-lg shadow-emerald-500/20"
+        >
+          {t.hero.primaryCta}
+        </a>
+        <a
+          href={`${basePrefix}#contato`}
+          class="inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-semibold text-slate-200 bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 transition"
+        >
+          {t.hero.secondaryCta}
+        </a>
+        <a
+          href="/curriculo-vanderson.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center px-4 py-3 rounded-lg text-sm font-medium text-slate-400 hover:text-slate-100 transition"
+        >
+          {t.hero.cvCta} &rarr;
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>

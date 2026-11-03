@@ -1,0 +1,25 @@
+---
+import type { Lang } from '../data/translations';
+import { siteContent } from '../data/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = siteContent[lang];
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="py-12 border-t border-slate-900 bg-slate-950 text-slate-400 text-xs font-mono">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <span class="text-emerald-400 font-bold">Vanderson Erlan</span>
+      <span>•</span>
+      <span>&copy; {currentYear} {t.footer.rights}</span>
+    </div>
+    <div class="text-slate-500 text-center sm:text-right">
+      {t.footer.techNote}
+    </div>
+  </div>
+</footer>
