@@ -21,9 +21,34 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-        display: ['Space Grotesk', 'Inter', 'sans-serif'],
+        sans: [
+          'JetBrainsMono Nerd Font',
+          'JetBrainsMono NF',
+          'JetBrains Mono',
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          'monospace',
+        ],
+        mono: [
+          'JetBrainsMono Nerd Font',
+          'JetBrainsMono NF',
+          'JetBrains Mono',
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          'monospace',
+        ],
+        display: [
+          'JetBrainsMono Nerd Font',
+          'JetBrainsMono NF',
+          'JetBrains Mono',
+          'monospace',
+        ],
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',

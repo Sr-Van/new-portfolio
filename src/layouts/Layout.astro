@@ -19,15 +19,19 @@ const {
     <meta name="description" content={description} />
     <title>{title}</title>
 
-    <!-- Google Font: Inter -->
+    <!-- JetBrainsMono Nerd Font & JetBrains Mono Fallback -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/mshaugh/nerdfont-webfonts@v3.3.0/build/jetbrainsmono.css"
+    />
   </head>
-  <body class="bg-black text-white min-h-screen font-sans antialiased selection:bg-white selection:text-black">
+  <body class="bg-black text-white min-h-screen font-mono antialiased selection:bg-white selection:text-black">
     <main class="max-w-2xl mx-auto px-6 py-16 sm:py-24">
       <slot />
     </main>
@@ -35,16 +39,31 @@ const {
 </html>
 
 <style is:global>
-  /* Estilo simples e direto para links */
+  @font-face {
+    font-family: 'JetBrainsMono Nerd Font';
+    src: local('JetBrainsMono Nerd Font'),
+         local('JetBrainsMono NF'),
+         local('JetBrains Mono Nerd Font');
+    font-display: swap;
+  }
+
+  :root {
+    font-family: 'JetBrainsMono Nerd Font', 'JetBrainsMono NF', 'JetBrains Mono', monospace;
+  }
+
+  /* Estilo padrão para todos os links com texto */
   a {
     color: #ffffff;
     text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 1px;
-    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+    text-underline-offset: 1px;
+    text-decoration-color: #0ea5e9;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
   }
   a:hover {
-    color: #a1a1aa;
-    text-decoration-color: #a1a1aa;
+    color: #000000;
+    background-color: #0ea5e9;
+    text-decoration-color: transparent;
   }
 </style>
