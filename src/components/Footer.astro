@@ -11,15 +11,17 @@ const t = siteContent[lang];
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="py-12 border-t border-slate-900 bg-slate-950 text-slate-400 text-xs font-mono">
+<footer class="py-14 border-t border-slate-800/80 bg-[#050811] text-slate-400 text-xs font-mono relative">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div class="flex items-center gap-2">
-      <span class="text-emerald-400 font-bold">Vanderson Erlan</span>
-      <span>•</span>
-      <span>&copy; {currentYear} {t.footer.rights}</span>
+    <div class="flex items-center gap-2.5">
+      <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+      <span class="text-white font-bold">Vanderson Erlan</span>
+      <span class="text-slate-600">//</span>
+      <span class="text-slate-400">&copy; {currentYear}</span>
     </div>
-    <div class="text-slate-500 text-center sm:text-right">
-      {t.footer.techNote}
+    
+    <div class="text-slate-500 text-center sm:text-right text-[11px]">
+      <span class="text-slate-400">Crafted with Astro + TailwindCSS</span> • {t.footer.techNote}
     </div>
   </div>
 </footer>

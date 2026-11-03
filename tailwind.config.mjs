@@ -6,17 +6,28 @@ export default {
     extend: {
       colors: {
         brand: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
+          50: '#ecfdf5',
+          100: '#d1fae5',
+          400: '#34d399',
           500: '#10b981',
           600: '#059669',
           700: '#047857',
         },
+        dark: {
+          950: '#070a12',
+          900: '#0b1120',
+          850: '#0f172a',
+          800: '#1e293b',
+        }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['Fira Code', 'monospace'],
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        display: ['Space Grotesk', 'Inter', 'sans-serif'],
       },
+      animation: {
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      }
     },
   },
   plugins: [],
