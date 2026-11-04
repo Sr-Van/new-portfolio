@@ -1,5 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const sections = [
+  { href: '/projetos', label: 'projetos' },
+  { href: '/habilidades', label: 'habilidades' },
+  { href: '/formacao', label: 'formacao' },
+  { href: '/links', label: 'links' },
+  { href: '/ferramentas', label: 'ferramentas' },
+];
 ---
 
 <Layout title="Vanderson Erlan — Desenvolvedor Web Full Stack">
@@ -18,31 +26,37 @@ import Layout from '../layouts/Layout.astro';
     <!-- Resumo Direto -->
     <section class="space-y-4 text-zinc-300 text-base leading-relaxed">
       <p>
-        Estudante de Ciência da Computação e desenvolvedor focado em criar soluções que equilibram tecnologia robusta e aplicabilidade prática.
-      </p>
-      <p>
-        Experiência com Angular, React, TypeScript, Node.js e Python. Vivência prática em ambientes com Docker, automação de fluxos CI/CD e integração com GenAI.
+        Construindo interfaces, sistemas e <a href="/projetos">soluções</a> para a Web. Gosto de tornar minhas ideias alcançáveis. Gosto de lidar com pessoas diretamente, penso que todo avanço derivou das interações entre indivíduos.
       </p>
     </section>
 
     <!-- Navegação para as Sessões -->
     <nav class="pt-6 border-t border-zinc-900">
+    <h3 class="text-zinc-400 text-sm pb-2 sm:text-lg">Menu</h3>
       <ul class="space-y-3 text-base">
-        <li>
-          <a href="/projetos">projetos</a>
-        </li>
-        <li>
-          <a href="/habilidades">habilidades</a>
-        </li>
-        <li>
-          <a href="/formacao">formacao</a>
-        </li>
-        <li>
-          <a href="/links">links</a>
-        </li>
-        <li>
-          <a href="/ferramentas">ferramentas</a>
-        </li>
+        {sections.map((section) => (
+          <li class="flex items-center gap-2 group [perspective:500px]">
+            <span
+              class="inline-flex text-zinc-500 transition-all duration-300 group-hover:text-sky-400 group-hover:[transform:rotateX(360deg)] select-none"
+              aria-hidden="true"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-3.5 h-3.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </span>
+            <a href={section.href}>{section.label}</a>
+          </li>
+        ))}
       </ul>
     </nav>
 
