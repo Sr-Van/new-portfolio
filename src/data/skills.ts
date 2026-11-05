@@ -33,6 +33,7 @@ export const skillsData: SkillCategory[] = [
       en: 'Back-end & APIs'
     },
     skills: [
+      { name: 'FastAPI', highlight: true },
       { name: 'Node.js', highlight: true },
       { name: 'Express', highlight: true },
       { name: 'Python', highlight: true },
@@ -48,11 +49,13 @@ export const skillsData: SkillCategory[] = [
       en: 'Data, AI & DevOps'
     },
     skills: [
+      { name: 'PostgreSQL', highlight: true },
       { name: 'MongoDB', highlight: true },
       { name: 'SQLite3', highlight: false },
       { name: 'Docker', highlight: true },
       { name: 'CI/CD Pipelines', highlight: true },
       { name: 'Google GenAI / LLMs', highlight: true },
+      { name: 'Faster-Whisper (STT)', highlight: false },
       { name: 'Git & GitHub', highlight: false },
       { name: 'Cloud Concepts (AWS/Azure)', highlight: false }
     ]

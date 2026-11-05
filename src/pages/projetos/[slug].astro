@@ -41,10 +41,20 @@ const { project } = Astro.props;
       </div>
 
       <!-- Links Diretos -->
-      <div class="flex items-center gap-4 pt-2 text-sm">
+      <div class="flex items-center gap-4 pt-2 text-sm flex-wrap">
         {project.githubUrl && (
           <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
             código no github &rarr;
+          </a>
+        )}
+        {project.githubBackendUrl && (
+          <a href={project.githubBackendUrl} target="_blank" rel="noopener noreferrer">
+            github (back-end) &rarr;
+          </a>
+        )}
+        {project.githubFrontendUrl && (
+          <a href={project.githubFrontendUrl} target="_blank" rel="noopener noreferrer">
+            github (front-end) &rarr;
           </a>
         )}
         {project.liveUrl && (
@@ -55,36 +65,27 @@ const { project } = Astro.props;
       </div>
     </header>
 
-    <!-- Demonstração em Vídeo -->
-    <section class="space-y-3 pt-6 border-t border-zinc-900">
-      <h2 class="text-lg font-semibold text-white">
-        demonstração em vídeo
-      </h2>
-      
-      {project.videoUrl ? (
+    <!-- Demonstração em Vídeo (Opcional) -->
+    {project.videoUrl && (
+      <section class="space-y-3 pt-6 border-t border-zinc-900">
+        <h2 class="text-lg font-semibold text-white">
+          demonstração em vídeo
+        </h2>
         <div class="aspect-video w-full bg-zinc-950 border border-zinc-800 rounded flex items-center justify-center overflow-hidden">
           <video controls class="w-full h-full">
             <source src={project.videoUrl} type="video/mp4" />
             Seu navegador não suporta a tag de vídeo.
           </video>
         </div>
-      ) : (
-        <div class="p-6 bg-zinc-950 border border-zinc-900 rounded text-sm text-zinc-400 space-y-2">
-          <p class="text-zinc-300 font-medium">[Vídeo de demonstração]</p>
-          <p class="text-xs text-zinc-500">
-            Adicione o arquivo de vídeo do projeto em <code>public/videos/</code> ou configure o link no arquivo <code>src/data/projects.ts</code>.
-          </p>
-        </div>
-      )}
-    </section>
+      </section>
+    )}
 
-    <!-- Prints / Screenshots -->
-    <section class="space-y-4 pt-6 border-t border-zinc-900">
-      <h2 class="text-lg font-semibold text-white">
-        telas e screenshots
-      </h2>
-      
-      {project.screenshots && project.screenshots.length > 0 ? (
+    <!-- Telas e Screenshots (Opcional) -->
+    {project.screenshots && project.screenshots.length > 0 && (
+      <section class="space-y-4 pt-6 border-t border-zinc-900">
+        <h2 class="text-lg font-semibold text-white">
+          telas e screenshots
+        </h2>
         <div class="space-y-6">
           {project.screenshots.map((shot) => (
             <figure class="space-y-2">
@@ -94,11 +95,7 @@ const { project } = Astro.props;
                   alt={shot.caption}
                   class="w-full h-auto rounded bg-zinc-900"
                   loading="lazy"
-                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
                 />
-                <div style="display:none;" class="p-8 text-center text-xs text-zinc-500 font-mono">
-                  [Imagem em {shot.url} — coloque a imagem na pasta public/]
-                </div>
               </div>
               <figcaption class="text-xs text-zinc-400 font-mono">
                 {shot.caption}
@@ -106,12 +103,8 @@ const { project } = Astro.props;
             </figure>
           ))}
         </div>
-      ) : (
-        <p class="text-sm text-zinc-500">
-          Nenhuma captura de tela cadastrada no momento.
-        </p>
-      )}
-    </section>
+      </section>
+    )}
 
     <!-- Explicações Detalhadas -->
     <section class="space-y-6 pt-6 border-t border-zinc-900 text-sm leading-relaxed text-zinc-300">
