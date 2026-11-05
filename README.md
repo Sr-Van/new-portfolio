@@ -1,13 +1,13 @@
 # Portfólio — Vanderson Erlan (Van.dev)
 
 Portfólio profissional de **Vanderson Erlan**, Desenvolvedor Web Full Stack.
-Construído com [Astro](https://astro.build/) e [TailwindCSS](https://tailwindcss.com/) com foco em altíssimo desempenho estático (Core Web Vitals 100/100), internacionalização (PT/EN) e arquitetura modular de dados.
+Construído com [Astro v5](https://astro.build/) e [TailwindCSS v3](https://tailwindcss.com/) com foco em estética minimalista *terminal-like*, altíssimo desempenho estático (Core Web Vitals 100/100), tipografia monoespaçada (JetBrains Mono / Nerd Font) e arquitetura modular de dados.
 
 ---
 
 ## 🚀 Como Executar Localmente
 
-1. Certifique-se de ter o Node.js instalado (v18+ ou superior).
+1. Certifique-se de ter o **Node.js** instalado (v18+ ou superior).
 2. Instale as dependências:
    ```bash
    npm install
@@ -20,45 +20,93 @@ Construído com [Astro](https://astro.build/) e [TailwindCSS](https://tailwindcs
 
 ---
 
-## 📁 Estrutura de Arquivos
+## 📁 Estrutura do Projeto
 
 ```text
 src/
-├── components/          # Componentes modulares (Hero, Projects, Skills, About, Contact, Navbar, Footer)
 ├── data/
-│   ├── projects.ts      # Dados da vitrine de projetos (com flag featured: true/false)
-│   ├── skills.ts        # Habilidades técnicas categorizadas
-│   └── translations.ts  # Textos bilíngues (Português & Inglês)
+│   ├── projects.ts       # Lista tipada de projetos (ProjectDetail) e estudos de caso
+│   ├── skills.ts         # Habilidades técnicas categorizadas e flags de destaque
+│   ├── tools.ts          # Ferramentas diárias, ambiente e infraestrutura
+│   └── translations.ts   # Estrutura base para conteúdo e metadados
 ├── layouts/
-│   └── Layout.astro     # Layout HTML base, fontes e SEO
+│   └── Layout.astro      # Layout base, fontes (JetBrains Mono), container e estilos globais
 └── pages/
-    ├── index.astro      # Página inicial em Português (/)
-    └── en/
-        └── index.astro  # Página inicial em Inglês (/en)
+    ├── index.astro       # Página inicial (apresentação e menu de navegação)
+    ├── ferramentas.astro # Ferramentas, editores e sistemas
+    ├── formacao.astro    # Formação acadêmica e idiomas
+    ├── habilidades.astro # Habilidades técnicas com marcadores de foco
+    ├── links.astro       # Links externos (GitHub, LinkedIn, e-mail e currículo)
+    └── projetos/
+        ├── index.astro   # Listagem de projetos ordenados por importância
+        └── [slug].astro  # Estudo de caso individual e detalhado gerado dinamicamente
+public/
+├── favicon.svg           # Ícone do site
+└── images/               # Screenshots e capturas de tela dos projetos
 ```
 
 ---
 
-## ⭐ Como Trocar os 2 Projetos Principais ou Adicionar Novos
+## 🛠️ Como Adicionar e Gerenciar Projetos
 
-Abra o arquivo [`src/data/projects.ts`](./src/data/projects.ts):
+Todos os dados de projetos estão centralizados em [`src/data/projects.ts`](./src/data/projects.ts).
 
-* **Para definir os 2 projetos principais**:
-  Basta colocar `featured: true` no projeto desejado e `featured: false` nos demais.
-  Os projetos principais ganham automaticamente o estilo especial (card expandido, badge visual `Destaque`, borda destacada e lista detalhada de arquitetura).
-* **Para adicionar um novo projeto**:
-  Basta adicionar um novo objeto na lista `projectsData` seguindo a interface `Project`.
+### 1. Adicionar um novo projeto
+Basta incluir um novo objeto na lista `projectsList` implementando a interface `ProjectDetail`:
+
+```typescript
+{
+  slug: 'meu-projeto',
+  title: 'Título do Projeto',
+  subtitle: 'Breve descrição em uma linha.',
+  importanceOrder: 3, // Ordem de exibição (1 = mais importante)
+  summary: 'Resumo geral sobre o escopo e valor da aplicação.',
+  technologies: ['TypeScript', 'Node.js', 'PostgreSQL'],
+  githubUrl: 'https://github.com/Sr-Van/meu-projeto', // ou use githubBackendUrl / githubFrontendUrl para projetos desacoplados
+  githubBackendUrl: 'https://github.com/Sr-Van/meu-projeto-api', // opcional
+  githubFrontendUrl: 'https://github.com/Sr-Van/meu-projeto-web', // opcional
+  liveUrl: 'https://exemplo.com',
+  videoUrl: '', // opcional: URL do vídeo (se vazio, a seção não é renderizada)
+  screenshots: [], // opcional: lista de imagens (se vazio, a seção não é renderizada)
+  content: {
+    context: 'Contexto e cenário de mercado ou do problema.',
+    problem: 'O desafio específico que precisava ser resolvido.',
+    solution: 'Como a aplicação foi desenhada para resolver o problema.',
+    architecture: [
+      'Decisão de arquitetura 1...',
+      'Decisão de arquitetura 2...'
+    ],
+    learnings: [
+      'Aprendizado técnico ou resultado alcançado 1...',
+      'Aprendizado técnico ou resultado alcançado 2...'
+    ]
+  }
+}
+```
+
+> **Nota:** As páginas individuais `/projetos/[slug]` são geradas estaticamente de forma automática pelo Astro via `getStaticPaths()`.
+
+### 2. Alterar a ordem de exibição
+Altere o campo `importanceOrder` de cada projeto (`1` para o principal, `2`, `3`, etc.). A listagem em `/projetos` ordena automaticamente de forma crescente.
 
 ---
 
-## 🌐 Como Atualizar Textos (PT-BR e EN)
+## 🧠 Como Atualizar Habilidades e Ferramentas
 
-Abra o arquivo [`src/data/translations.ts`](./src/data/translations.ts):
-Todos os textos do site (apresentação, sobre mim, labels, CTAs, formação e contato) estão centralizados nos nós `pt` e `en`.
+* **Habilidades:** Edite [`src/data/skills.ts`](./src/data/skills.ts). Adicione tecnologias nas categorias correspondentes (`Front-end`, `Back-end & APIs`, `Dados, IA & DevOps`) e use `highlight: true` para marcar as competências de foco principal com a tag `[foco]`.
+* **Ferramentas:** Edite [`src/data/tools.ts`](./src/data/tools.ts) para atualizar sistemas operacionais, editores, terminais, containers e serviços de nuvem.
 
 ---
 
-## 📦 Build para Produção (cPanel / Apache / Nginx / VPS)
+## 📄 Arquivos Estáticos (Currículo e Imagens)
+
+Para disponibilizar arquivos para download ou exibição:
+* **Currículo em PDF:** Coloque o arquivo em `public/curriculo-vanderson.pdf` para corresponder ao link configurado em [`src/pages/links.astro`](./src/pages/links.astro).
+* **Screenshots:** Coloque as imagens na pasta `public/images/` referenciando-as nos projetos (ex: `/images/marketplace-preview.png`).
+
+---
+
+## 📦 Build para Produção (VPS / Nginx / Apache / cPanel)
 
 Para gerar os arquivos estáticos finais:
 
@@ -66,5 +114,5 @@ Para gerar os arquivos estáticos finais:
 npm run build
 ```
 
-O comando compilará todo o site para a pasta **`dist/`**.
-Basta fazer o upload do conteúdo da pasta `dist/` para a pasta `public_html` do seu cPanel ou para o diretório raiz configurado no seu servidor Nginx/Apache no domínio **`portfolio-vandev.digital`**.
+O Astro compilará todos os arquivos estáticos na pasta **`dist/`**.
+Basta transferir o conteúdo da pasta `dist/` para a raiz de publicação do servidor web (ex: `/var/www/html` no Nginx/Apache ou pasta `public_html` no cPanel).
