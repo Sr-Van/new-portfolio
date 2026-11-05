@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="404 — Página Não Encontrada — Vanderson Erlan">
+  <div class="space-y-8">
+    
+    <!-- Link de Retorno -->
+    <nav>
+      <a href="/" class="text-sm text-zinc-400 hover:text-white no-underline hover:underline">
+        &larr; início
+      </a>
+    </nav>
+
+    <!-- Cabeçalho do Erro 404 -->
+    <header class="space-y-3">
+      <div class="inline-flex items-center gap-2 px-2.5 py-1 text-xs font-mono text-rose-400 bg-rose-950/40 border border-rose-900/60 rounded">
+        <span>status: 404 not found</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white font-mono">
+        rota não encontrada
+      </h1>
+      <p class="text-zinc-400 text-sm leading-relaxed">
+        O comando ou endereço acessado não existe, foi movido ou você digitou incorretamente.
+      </p>
+    </header>
+
+    <!-- Terminal Box Informativo -->
+    <section class="p-4 bg-zinc-950 border border-zinc-900 rounded font-mono text-xs sm:text-sm space-y-2 text-zinc-400">
+      <p class="text-zinc-500">
+        # verificação do sistema
+      </p>
+      <p>
+        <span class="text-sky-400">van-dev:~$</span> test -e /destino
+      </p>
+      <p class="text-rose-400">
+        erro: arquivo ou diretório inexistente.
+      </p>
+    </section>
+
+    <!-- Ações Recomendadas -->
+    <section class="pt-4 border-t border-zinc-900 space-y-3 text-sm">
+      <p class="text-zinc-400 text-xs">
+        navegue diretamente para as seções principais:
+      </p>
+      <ul class="space-y-2">
+        <li>
+          <a href="/projetos">ver projetos &rarr;</a>
+        </li>
+        <li>
+          <a href="/habilidades">ver habilidades &rarr;</a>
+        </li>
+        <li>
+          <a href="/links">formas de contato e links &rarr;</a>
+        </li>
+      </ul>
+    </section>
+
+  </div>
+</Layout>
